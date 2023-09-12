@@ -14,6 +14,10 @@ export class ColorChangerComponent implements OnInit{
 
   ngOnInit(): void {
     this.renderer.setStyle(document.body, 'background-color',this.currentColor);
+    this.renderer.listen('window', 'click',(e:MouseEvent)=>{
+      this.changeBackgroundColor();
+    });
+
     }
 
   changeBackgroundColor() {
@@ -36,8 +40,10 @@ export class ColorChangerComponent implements OnInit{
   }
 
   nextValueByIndex(enumType: any, index: number): any {
-    index++;
-    if (index === Object.values(enumType).length ) index = 0;
+    //index++;
+    index = (index === Object.values(enumType).length -1) ? 0: ++index;
+    console.log(index);
+    //if (index === Object.values(enumType).length ) index = 0;
     return Object.values(enumType)[index];
   }
 
