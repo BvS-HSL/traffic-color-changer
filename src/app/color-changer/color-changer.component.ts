@@ -9,6 +9,7 @@ import {TrafficLightColor} from "./traffic-light-color.enum";
 export class ColorChangerComponent implements OnInit{
 
   public currentColor : TrafficLightColor = TrafficLightColor.GREEN;
+  public isButtonVisible : boolean = true;
 
   constructor(private renderer: Renderer2) { }
 
@@ -16,9 +17,9 @@ export class ColorChangerComponent implements OnInit{
     this.renderer.setStyle(document.body, 'background-color',this.currentColor);
     this.renderer.listen('window', 'click',(e:MouseEvent)=>{
       this.changeBackgroundColor();
+      this.isButtonVisible= false;
     });
-
-    }
+  }
 
   changeBackgroundColor() {
     let colorIndex = this.getEnumIndexByValue(TrafficLightColor,  this.currentColor);
